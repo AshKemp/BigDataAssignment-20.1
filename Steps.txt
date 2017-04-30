@@ -1,0 +1,13 @@
+Step 1:
+Create table in mysql:
+
+create table juices (id not null primary key,name varchar(20));
+
+Step 2:
+Using sqoop to load first.txt
+
+sqoop export --connect jdbc:mysql://localhost/sqoopDB --username 'root' -P --table 'juices' --export-dir 'hdfs://localhost:9000/first.txt'
+
+Now load second.txt
+
+sqoop export --connect jdbc:mysql://localhost/sqoopDB --username 'root' -P --table 'juices' --update-key id --update-mode allowinsert --export-dir 'hdfs://localhost:9000/second.txt'
